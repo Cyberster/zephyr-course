@@ -1,0 +1,69 @@
+source "Kconfig.zephyr"
+
+menu "Application Configuration"
+    
+    # menu as config i.e. menu+checkbox with sub menu
+    menuconfig LED_SUBSYSTEM
+        bool "LED Subsystem"
+        default y
+    
+        if LED_SUBSYSTEM
+            choice
+                prompt "LED blink sleep time"
+                default BLINK_SLEEP_1000MS
+
+                config BLINK_SLEEP_250MS
+                    bool "250ms (very fast)"
+
+                config BLINK_SLEEP_500MS
+                    bool "500ms (fast)"
+
+                config BLINK_SLEEP_1000MS
+                    bool "1s (medium)"
+
+                config BLINK_SLEEP_2000MS
+                    bool "2s (slow)"
+            endchoice
+
+            config BLINK_SLEEP_TIME_MS # use this in code
+                int # <-- No label / prompt = hidden
+                default 250 if BLINK_SLEEP_250MS
+                default 500 if BLINK_SLEEP_500MS
+                default 1000 if BLINK_SLEEP_1000MS
+                default 2000 if BLINK_SLEEP_2000MS
+                default 0
+
+            menuconfig LED_ADVANCED
+                bool "Advanced LED settings"
+                default y
+            
+                if LED_ADVANCED
+                    # brightness
+                    config  LED_BRIGHTNESS
+                        int "LED brightness (0-100)"
+                        range 0 100
+                        default 100
+
+                    # fade duration
+                    config  LED_FADE_DURATION_MS
+                        int "LED fade duration (ms)"
+                        range 0 5000
+                        default 500
+                endif
+
+                # menu: expert settings
+                menu "Expert settings"
+                    # visible if LED_ADVANCED # snake oil???
+                    visible if LED_BRIGHTNESS != 0
+
+                    config LED_DEBUG
+                        bool "Enable LED debugging"
+
+                    config LED_BLINK_PATTERN
+                        bool "Custom blink pattern"
+                        
+                endmenu
+
+        endif
+
+endmenu

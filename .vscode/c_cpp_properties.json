@@ -1,0 +1,34 @@
+{
+    "configurations": [
+        {
+            "name": "Zephyr",
+            "compilerPath": "",
+            "compileCommands": [
+                "${workspaceFolder}/build/compile_commands.json"
+            ],
+            "intelliSenseMode": "gcc-arm",
+            "cStandard": "c99",
+            "cppStandard": "c++17",
+            "includePath": [
+                "${default}",
+                "D:/zephyr-tutorials/zephyrproject/zephyr/include"
+            ]
+        },
+        {
+            "name": "Zephyr_Config",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:\\MinGW\\bin\\gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "windows-gcc-x86"
+        }
+    ],
+    "version": 4
+}

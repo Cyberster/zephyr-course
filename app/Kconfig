@@ -11,3 +11,5 @@ menu "Application Configuration"
         default 500
 
 endmenu
+
+rsource "drivers/our_driver/Kconfig"

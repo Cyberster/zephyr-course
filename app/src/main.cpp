@@ -2,6 +2,7 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/drivers/sensor.h>
+#include "../drivers/our_driver/our_driver_task2.h"
 
 // #define SLEEP_TIME_MS 500
 
@@ -24,11 +25,18 @@ namespace {
 }
 
 int main(void) {
-    while (1) {
-        turn_on_led();
-        k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS);
+    uint32_t counter = 0;
 
-        turn_off_led();
+    while (1) {
+        // turn_on_led();
+        // k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS);
+
+        // turn_off_led();
+        // k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS);
+
+        toggle_led(&counter); // calling from our_driver_task2.h interface, implemented in our_driver.c
+        
+        LOG_INF("counter: %d\n", counter);
         k_msleep(CONFIG_APP_HEARTBEAT_PERIOD_MS);
     }
 

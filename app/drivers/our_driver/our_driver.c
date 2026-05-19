@@ -28,6 +28,16 @@ static int channel_get_my_impl(const struct device *dev,
     return 0;
 }
 
+// static int channel_attr_get_my_impl(const struct device *dev,
+//                                 enum sensor_channel chan,
+//                                 struct sensor_value *val) {
+//     LOG_INF("Hello from channel get, channel %d", chan);
+
+//     if (gpio_pin_set_dt(&led, 0) < 0) return 0;
+
+//     return 0;
+// }
+
 void toggle_led(uint32_t *counter) {
     (*counter)++;
     if (gpio_pin_toggle_dt(&led) < 0) return;
@@ -35,7 +45,8 @@ void toggle_led(uint32_t *counter) {
 
 static DEVICE_API(sensor, api_iomico_lecture) = {
     .sample_fetch = sample_fetch_my_impl,
-    .channel_get = channel_get_my_impl
+    .channel_get = channel_get_my_impl,
+    // .attr_get = channel_attr_get_my_impl
 }; 
 
 // Init function
